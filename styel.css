@@ -2,8 +2,8 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Roboto Serif", sans-serif;
   scroll-behavior: smooth;
+  font-family: "Cairo", sans-serif;
 }
 :root {
   --praimary-color: #6195ff;
