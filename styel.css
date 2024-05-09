@@ -11,11 +11,11 @@
 }
 /* /scroll/ */
 ::-webkit-scrollbar {
-  background-color: var(--praimary-color);
+  background-color: white;
   width: 8px;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: white;
+  background-color: var(--praimary-color);
 }
 /* section-header */
 .section-header {
@@ -275,7 +275,7 @@ a {
   background-color: rgba(0, 0, 0, 0.415);
 }
 .propertiesPage .header {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0);
 }
 .propertiesPage .propertiessec {
   background-image: url(../images/background/background3.jpg);
@@ -306,7 +306,6 @@ a {
 }
 .propertiesPage .arrow {
   position: absolute;
-  top: calc(100% + 10px);
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: rgb(255, 255, 255);
@@ -324,7 +323,21 @@ a {
   transform: translateY(5px);
   cursor: pointer;
 }
-
+.propertiesPage table {
+  width: 90%;
+  margin: 5rem auto;
+  text-align: center;
+}
+.propertiesPage table tr {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.propertiesPage table tr:not(thead tr):hover {
+  background-color: rgba(0, 0, 0, 0.106);
+}
+.propertiesPage table td {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+}
 /* footer */
 footer {
   text-align: center;
