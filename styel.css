@@ -5,6 +5,7 @@
   scroll-behavior: smooth;
   font-family: "Cairo", sans-serif;
 }
+
 :root {
   --praimary-color: #6195ff;
 }
@@ -122,15 +123,19 @@ a {
 }
 
 /*home*/
-
 .homesec {
   background-image: url(../images/background/background1.jpg);
+  background-attachment: fixed;
   height: 100vh;
   background-size: cover;
+  z-index: 2;
   position: relative;
 }
 .overlay {
   position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.656);
@@ -206,6 +211,120 @@ a {
   line-height: 25px;
   color: #a38a8a;
 }
+
+/* About us page  */
+.aboutPage .header {
+  background-color: transparent;
+}
+.aboutPage .Aboutsec {
+  background-image: url(../images/background/background2.webp);
+  min-height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.aboutPage .home-content_About {
+  width: 80%;
+  margin: auto auto;
+  max-height: 60%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.aboutPage .home-content_About .title {
+  transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  font-size: 60px;
+  word-wrap: break-word;
+}
+.aboutPage .home-content_About .title p {
+  font-size: 70px;
+  color: rgb(37, 142, 254);
+}
+.aboutPage .home-content_About .info {
+  background: rgba(115, 115, 115, 0.19);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(145, 145, 145, 0.1);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
+  transition: all 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  padding: 2rem;
+  text-align: center;
+}
+.aboutPage .home-content_About .info:hover {
+  transform: rotate(-1.2deg) scale(1.01);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  box-shadow: 0 4px 3px rgba(255, 255, 255, 0.251);
+}
+.aboutPage .home-content_About .info span,
+.aboutPage .home-content_About .info h3 {
+  color: rgb(100, 175, 255);
+}
+
+/* properties  page  */
+.propertiesPage {
+  position: relative;
+}
+.propertiesPage .overlay {
+  background-color: rgba(0, 0, 0, 0.415);
+}
+.propertiesPage .header {
+  background-color: transparent;
+}
+.propertiesPage .propertiessec {
+  background-image: url(../images/background/background3.jpg);
+  height: 80vh;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: 2;
+  position: relative;
+}
+.propertiesPage .propertiessec .hero {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.propertiesPage .propertiessec .hero h3 {
+  color: white;
+  font-size: 4.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.propertiesPage .propertiessec .hero h3:hover {
+  letter-spacing: 4px;
+}
+.propertiesPage .arrow {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(255, 255, 255);
+  padding: 14px;
+  width: 200px;
+  text-align: center;
+  border-radius: 8px;
+  z-index: 4;
+}
+.propertiesPage .arrow img {
+  width: 40%;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.propertiesPage .arrow:hover img {
+  transform: translateY(5px);
+  cursor: pointer;
+}
+
 /* footer */
 footer {
   text-align: center;
