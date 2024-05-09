@@ -5,9 +5,18 @@
   scroll-behavior: smooth;
   font-family: "Cairo", sans-serif;
 }
-
 :root {
   --praimary-color: #6195ff;
+}
+/* general */
+tr,
+td,
+th {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+input[type="radio"],
+input[type="checkbox"] {
+  transform: scale(1.5);
 }
 /* /scroll/ */
 ::-webkit-scrollbar {
