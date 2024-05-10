@@ -54,25 +54,97 @@
         <a href="#table"><img src="./images/assists/arrow.png" alt="" /></a>
       </div>
       <!-- table -->
-      <table id="table">
-        <thead>
-          <tr>
-            <td>المدينة</td>
-            <td>التفاصيل</td>
-            <td>الإجار الشهري</td>
-            <td>إظهار التفاصيل</td>
-            <td>اختيار</td>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <!-- dynamic data -->
-        </tbody>
-      </table>
+      <div class="table_container">
+        <table id="table">
+          <thead>
+            <tr>
+              <td>المدينة</td>
+              <td>التفاصيل</td>
+              <td>الإجار الشهري</td>
+              <td>إظهار التفاصيل</td>
+              <td>اختيار</td>
+            </tr>
+          </thead>
+          <tbody id="tbody">
+            <!-- dynamic data -->
+          </tbody>
+        </table>
+        <button onclick="openFormFun()">متابعة</button>
+        <!-- form -->
+        <div id="formContainer" style="display: none">
+          <form id="requestForm" onsubmit="submitForm(event)">
+            <div>
+              <div>
+                <label for="fullName">الاسم الكامل:</label>
+                <input
+                  type="text"
+                  id="fullName"
+                  name="fullName"
+                  pattern="[ء-ي]+"
+                  title="يرجى إدخال أحرف هجائية فقط باللغة العربية"
+                />
+              </div>
+              <div>
+                <label for="nationalId">الرقم الوطني:</label>
+                <input
+                  type="text"
+                  id="nationalId"
+                  name="nationalId"
+                  required
+                  pattern="[0-9]{11}"
+                  title="يجب أن يكون الرقم الوطني مكون من 11 رقمًا"
+                />
+              </div>
+            </div>
+            <div>
+              <div>
+                <label for="birthDate">تاريخ الميلاد:</label>
+                <input
+                  type="text"
+                  id="birthDate"
+                  name="birthDate"
+                  placeholder="yyyy-mm-dd"
+                  pattern="\d{4}-\d{2}-\d{2}"
+                  title="يرجى إدخال التاريخ بالصيغة الصحيحة"
+                />
+              </div>
+              <div>
+                <label for="mobileNumber">رقم الهاتف:</label>
+                <input
+                  type="tel"
+                  id="mobileNumber"
+                  name="mobileNumber"
+                  pattern="09[0-9]{8}"
+                  title="يرجى إدخال رقم هاتف صحيح"
+                />
+              </div>
+            </div>
+            <div>
+              <div>
+                <label for="email">الإيميل:</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  title="يرجى إدخال الإيميل "
+                />
+              </div>
+            </div>
+            <!-- recaptcha -->
+            <div class="g-recaptcha" data-sitekey="6LfeQdcpAAAAAMyDZfCdC-rmGgoSzV4b_pKcbQe_"></div>
+            <!-- submit btn -->
+            <input type="submit" id="submit" value="إرسال" />
+          </form>
+        </div>
+      </div>
+
       <!-- footer -->
-      <footer style="">بإشراف الدكتور مازن خضر</footer>
+      <footer>بإشراف الدكتور مازن خضر</footer>
       <!-- go to top  -->
       <div class="goToTop" id="goToTop">⬆</div>
     </div>
   </body>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script src="main.js"></script>
 </html>

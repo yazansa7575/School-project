@@ -1,6 +1,7 @@
 let header = document.getElementById("header");
 let goToTop_arrow = document.getElementById("goToTop");
 let tbody = document.getElementById("tbody");
+let formContainer = document.getElementById("formContainer");
 
 // on scroll - hide header/ show arrow
 window.onscroll = () => {
@@ -90,7 +91,7 @@ for (let i = 0; i < Properties_data.length; i++) {
     <td>${Properties_data[i].details}</td>
     <td>${Properties_data[i].monthly_rent}</td>
     <td><input type="checkbox" name="checkbox" onclick="checkbox_Clicked(${Properties_data[i].id},this.checked)"/></td>
-    <td><input type="radio" name="radio" onclick="checkbox_Clicked(${Properties_data[i].id})" /></td>
+    <td><input type="radio" name="radio" onclick="radio_Clicked(${Properties_data[i].id})" /></td>
   </tr>
   `;
 }
@@ -125,7 +126,9 @@ const checkbox_Clicked = (id, ischecked) => {
       } </p>
     </div>
     <div>
-      <img loading="lazy" src=${Properties_data[id - 1].info.img} alt="img" width="300px" />
+      <img loading="lazy" src=${
+        Properties_data[id - 1].info.img
+      } alt="img" width="300px" />
     </div>
    </div>
 
@@ -141,5 +144,61 @@ const checkbox_Clicked = (id, ischecked) => {
 };
 // radio Clicked fun
 const radio_Clicked = (id) => {
-  alert(id);
+  let cart = [];
+  cart.push(Properties_data[id - 1]);
+  localStorage.setItem("cart", JSON.stringify(cart));
+};
+// open Form Fun
+const openFormFun = () => {
+  if (typeof JSON.parse(localStorage.getItem("cart"))[0].id == "number")
+    formContainer.style.display = "block";
+  formContainer.scrollIntoView();
+  let setTime = setTimeout(() => {
+    formContainer.scrollIntoView();
+    clearTimeout(setTime);
+  }, 400);
+};
+// submit Form
+const submitForm = async (event) => {
+  event.preventDefault();
+  const token = grecaptcha.getResponse();
+  console.log(token); 
+
+  try {
+    const captchaVerified = await verifyCaptcha(token);
+    if (captchaVerified) {
+      let selectedProperty = JSON.parse(localStorage.getItem("cart"));
+      if (selectedProperty) {
+        let message = `تم استلام طلبك بنجاح! تم اختيار العقار: ${selectedProperty[0].details}`;
+        alert(message);
+      } else {
+        alert("حدث خطأ أثناء معالجة الطلب.");
+      }
+    } else {
+      alert("فشل التحقق من Captcha");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("حدث خطأ أثناء التحقق من Captcha");
+  }
+};
+
+// verifyCaptcha
+const verifyCaptcha = (token) => {
+  return new Promise((resolve, reject) => {
+    fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `secret=6LfeQdcpAAAAAMyDZfCdC-rmGgoSzV4b_pKcbQe_&response=${token}`,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          resolve(true);
+        } else {
+          reject("Failed Captcha verification");
+        }
+      })
+      .catch((error) => reject(error));
+  });
 };
