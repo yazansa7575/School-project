@@ -189,7 +189,7 @@ const verifyCaptcha = (token) => {
     fetch("https://www.google.com/recaptcha/api/siteverify", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `secret=6LfeQdcpAAAAAMyDZfCdC-rmGgoSzV4b_pKcbQe_&response=${token}`,
+      body: `secret=6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y&response=${token}`,
     })
       .then((response) => response.json())
       .then((data) => {
