@@ -161,11 +161,9 @@ const openFormFun = () => {
 // submit Form
 const submitForm = async (event) => {
   event.preventDefault();
-  const token = grecaptcha.getResponse();
-  console.log(token);
-
   try {
-    const captchaVerified = executeRecaptcha();
+    const token = await executeRecaptcha();
+    console.log(token);
     if (captchaVerified) {
       let selectedProperty = JSON.parse(localStorage.getItem("cart"));
       if (selectedProperty) {
@@ -184,30 +182,16 @@ const submitForm = async (event) => {
 };
 
 // verifyCaptcha
-// const verifyCaptcha = (token) => {
-//   return new Promise((resolve, reject) => {
-//     fetch("https://www.google.com/recaptcha/api/siteverify", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-//       body: `secret=6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y&response=${token}`,
-//     })
-//       .then((response) => response.json())
-//       .then((data) => {
-//         if (data.success) {
-//           resolve(true);
-//         } else {
-//           reject("Failed Captcha verification");
-//         }
-//       })
-//       .catch((error) => reject(error));
-//   });
-// };
 function executeRecaptcha() {
-  grecaptcha.ready(function () {
-    grecaptcha
-      .execute("6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y", { action: "login" })
-      .then(function (token) {
-        console.log(token);
-      });
+  return new Promise((resolve, reject) => {
+    grecaptcha.ready(() => {
+      grecaptcha
+        .execute("6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y", {
+          action: "login",
+        })
+        .then((token) => {
+          resolve(token);
+        });
+    });
   });
 }
