@@ -15,7 +15,8 @@
     />
     <!-- google fonts -->
     <!-- recaptcha -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y"></script>
+
     <!-- recaptcha -->
   </head>
   <body dir="rtl">
@@ -72,7 +73,9 @@
             <!-- dynamic data -->
           </tbody>
         </table>
-        <button onclick="openFormFun()">متابعة</button>
+        <button id="followBtn" disabled="true" onclick="openFormFun(this)">
+          متابعة
+        </button>
         <!-- form -->
         <div id="formContainer" style="display: none">
           <form id="requestForm" onsubmit="submitForm(event)">
@@ -151,5 +154,9 @@
       <div class="goToTop" id="goToTop">⬆</div>
     </div>
   </body>
+  <!-- jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- main -->
   <script src="main.js"></script>
 </html>
+

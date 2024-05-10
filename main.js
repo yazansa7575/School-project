@@ -1,6 +1,7 @@
 let header = document.getElementById("header");
 let goToTop_arrow = document.getElementById("goToTop");
 let tbody = document.getElementById("tbody");
+let followBtn = document.getElementById("followBtn");
 let formContainer = document.getElementById("formContainer");
 
 // on scroll - hide header/ show arrow
@@ -146,6 +147,7 @@ const checkbox_Clicked = (id, ischecked) => {
 const radio_Clicked = (id) => {
   let cart = [];
   cart.push(Properties_data[id - 1]);
+  followBtn.disabled = false;
   localStorage.setItem("cart", JSON.stringify(cart));
 };
 // open Form Fun
@@ -159,16 +161,75 @@ const openFormFun = () => {
   }, 400);
 };
 // submit Form
+// submit Form
 const submitForm = async (event) => {
   event.preventDefault();
   try {
     const token = await executeRecaptcha();
     console.log(token);
-    if (captchaVerified) {
+    if (token) {
       let selectedProperty = JSON.parse(localStorage.getItem("cart"));
+      console.log(selectedProperty);
       if (selectedProperty) {
-        let message = `تم استلام طلبك بنجاح! تم اختيار العقار: ${selectedProperty[0].details}`;
-        alert(message);
+        let message = `تم استلام طلبك بنجاح ✅`;
+        // create modal
+        let modalContent = `<div id="myModal" class="modal">
+        <div class="modal-content">
+          <div>
+            <span class="close">X</span>
+            <p id="modalMessage">${message}</p>
+          </div>
+          <div
+            style="
+              text-align: right;
+              display: flex;
+              align-items: center;
+              justify-content: space-around;
+            "
+          >
+            <div>
+              <p style="color:black; font-size: 24px" ;>
+                - المنطقة :${selectedProperty[0].info.Region}
+              </p>
+              <p style="color:black; font-size: 24px" ;>
+                - الطابق :${selectedProperty[0].info.Floor}
+              </p>
+              <p style="color:black; font-size: 24px" ;>
+                - الملكية :${selectedProperty[0].info.Property}
+              </p>
+              <p style="color:black; font-size: 24px" ;>
+                - مفروش :${selectedProperty[0].info.Furnished}
+              </p>
+              <p style="color:black; font-size: 24px" ;>
+                - معلومات اخرى :${selectedProperty[0].info.other}
+              </p>
+            </div>
+            <div>
+              <img
+                loading="lazy"
+                src="${selectedProperty[0].info.img}"
+                alt="img"
+                width="200px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>`;
+        // add the modal to doc
+        $("body").append(modalContent);
+        // open it -->open the modal
+        $("#myModal").css("display", "flex");
+        $("body").css("overflow", "hidden");
+        // close it -->close the modal
+        $(".close").click(function () {
+          $("#myModal").css("display", "none");
+          $("body").css("overflow", "auto");
+          setTimeout(() => {
+            window.location.href = "./Home.html";
+          }, 1000);
+        });
+        // delete cart from local storge
+        localStorage.removeItem("cart");
       } else {
         alert("حدث خطأ أثناء معالجة الطلب.");
       }
@@ -184,8 +245,8 @@ const submitForm = async (event) => {
 // verifyCaptcha
 function executeRecaptcha() {
   return new Promise((resolve, reject) => {
-    grecaptcha.ready(() => {
-      grecaptcha
+    grecaptcha.enterprise.ready(() => {
+      grecaptcha.enterprise
         .execute("6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y", {
           action: "login",
         })

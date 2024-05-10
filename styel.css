@@ -380,6 +380,10 @@ a {
 .propertiesPage button {
   margin: 10px;
 }
+.propertiesPage button:disabled {
+  background-color: rgba(128, 128, 128, 0.495);
+  cursor: not-allowed;
+}
 .propertiesPage #formContainer {
   padding: 1rem;
 }
@@ -443,7 +447,54 @@ footer {
 .goToTop:hover {
   animation: gototop_anim 1s ease-in-out;
 }
+/* modal */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
 
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  min-width: 800px;
+  max-width: 1200px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+.modal-content > div {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 15px;
+}
+.modal-content p {
+  color: green;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.modal-content img{
+  box-shadow: -5px 5px 10px 2px rgba(0, 0, 0, 0.258);
+}
 @keyframes gototop_anim {
   0% {
     bottom: 20px;
