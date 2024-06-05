@@ -14,10 +14,6 @@
       rel="stylesheet"
     />
     <!-- google fonts -->
-    <!-- recaptcha -->
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y"></script>
-
-    <!-- recaptcha -->
   </head>
   <body dir="rtl">
     <div class="propertiesPage">
@@ -26,7 +22,7 @@
           <div class="pf">
             <div class="logo">
               <img
-                src="images/logo.png"
+                src="./images/logo.png"
                 alt="logo"
                 draggable="false"
                 width="180px"
@@ -37,7 +33,7 @@
                 <a href="Home.html">الصفحة الرئيسية</a>
               </li>
               <li class="aboute">
-                <a href="Aboute.html">من نحن</a>
+                <a href="AbouteUs.html">من نحن</a>
               </li>
               <li class="Properties">
                 <a class="active" href="Properties.html">العقارات</a>
@@ -86,7 +82,7 @@
                   type="text"
                   id="fullName"
                   name="fullName"
-                  pattern="[ء-ي]+"
+                  pattern="[ء-ي\s]+"
                   title="يرجى إدخال أحرف هجائية فقط باللغة العربية"
                 />
               </div>
@@ -138,10 +134,10 @@
               </div>
             </div>
             <!-- recaptcha -->
-            <div
-              class="g-recaptcha"
-              data-sitekey="6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y"
-            ></div>
+            <div class="captcha-container">
+              <div id="captcha"></div>
+              <input type="text" id="captchaInput" placeholder="Enter CAPTCHA" />
+            </div>
             <!-- submit btn -->
             <input type="submit" id="submit" value="إرسال" />
           </form>
@@ -157,6 +153,6 @@
   <!-- jquery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- main -->
-  <script src="main.js"></script>
+  <script src="myFunctions.js"></script>
 </html>
 

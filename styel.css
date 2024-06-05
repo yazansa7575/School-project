@@ -154,7 +154,7 @@ a {
 
 /*home*/
 .homesec {
-  background-image: url(../images/background/background1.jpg);
+  background-image: url(./images/background/background1.jpg);
   background-attachment: fixed;
   height: 100vh;
   background-size: cover;
@@ -217,7 +217,12 @@ a {
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
+}
+.section-students .card {
+  min-width: 300px;
+  width: 460px;
+  overflow-wrap: break-word;
 }
 .section-students .students-content {
   padding: 14px;
@@ -247,7 +252,7 @@ a {
   background-color: transparent;
 }
 .aboutPage .Aboutsec {
-  background-image: url(../images/background/background2.webp);
+  background-image: url(./images/background/background2.webp);
   min-height: 100vh;
   background-size: cover;
   background-attachment: fixed;
@@ -308,7 +313,7 @@ a {
   background-color: rgba(0, 0, 0, 0);
 }
 .propertiesPage .propertiessec {
-  background-image: url(../images/background/background3.jpg);
+  background-image: url(./images/background/background3.jpg);
   height: 80vh;
   background-size: cover;
   background-attachment: fixed;

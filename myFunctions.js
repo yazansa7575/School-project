@@ -3,6 +3,8 @@ let goToTop_arrow = document.getElementById("goToTop");
 let tbody = document.getElementById("tbody");
 let followBtn = document.getElementById("followBtn");
 let formContainer = document.getElementById("formContainer");
+let cap = document.getElementById("captcha");
+let captchaField = document.getElementById("captchaInput");
 
 // on scroll - hide header/ show arrow
 window.onscroll = () => {
@@ -22,7 +24,6 @@ goToTop_arrow.addEventListener("click", () => {
 });
 
 // table fun ===
-// console.log("tbody", tbody);
 
 //  dynamic data tbody [in table]
 let Properties_data = [
@@ -50,7 +51,7 @@ let Properties_data = [
       Floor: "طابق اول  ",
       Property: "طابو اخضر ",
       Furnished: "لا ",
-      img: "/images/Properties/Properties(2).jpg",
+      img: "./images/Properties/Properties(2).jpg",
       other: "مع بلكون 12 متر  ",
     },
   },
@@ -64,7 +65,7 @@ let Properties_data = [
       Floor: "طابق اول  ",
       Property: "طابو اخضر ",
       Furnished: "لا ",
-      img: "/images/Properties/Properties(3).jpg",
+      img: "./images/Properties/Properties(3).jpg",
       other: "مع بلكون 12 متر  ",
     },
   },
@@ -78,7 +79,7 @@ let Properties_data = [
       Floor: "طابق اول  ",
       Property: "طابو اخضر ",
       Furnished: "لا ",
-      img: "/images/Properties/Properties(4).jpg",
+      img: "./images/Properties/Properties(4).jpg",
       other: "مع بلكون 12 متر  ",
     },
   },
@@ -161,19 +162,16 @@ const openFormFun = () => {
   }, 400);
 };
 // submit Form
-// submit Form
-const submitForm = async (event) => {
+const submitForm = (event) => {
   event.preventDefault();
-  try {
-    const token = await executeRecaptcha();
-    console.log(token);
-    if (token) {
-      let selectedProperty = JSON.parse(localStorage.getItem("cart"));
-      console.log(selectedProperty);
-      if (selectedProperty) {
-        let message = `تم استلام طلبك بنجاح ✅`;
-        // create modal
-        let modalContent = `<div id="myModal" class="modal">
+
+  const token = executeRecaptcha();
+  if (token) {
+    let selectedProperty = JSON.parse(localStorage.getItem("cart"));
+    if (selectedProperty) {
+      let message = `تم استلام طلبك بنجاح ✅`;
+      // create modal
+      let modalContent = `<div id="myModal" class="modal">
         <div class="modal-content">
           <div>
             <span class="close">X</span>
@@ -215,44 +213,52 @@ const submitForm = async (event) => {
           </div>
         </div>
       </div>`;
-        // add the modal to doc
-        $("body").append(modalContent);
-        // open it -->open the modal
-        $("#myModal").css("display", "flex");
-        $("body").css("overflow", "hidden");
-        // close it -->close the modal
-        $(".close").click(function () {
-          $("#myModal").css("display", "none");
-          $("body").css("overflow", "auto");
-          setTimeout(() => {
-            window.location.href = "./Home.html";
-          }, 1000);
-        });
-        // delete cart from local storge
-        localStorage.removeItem("cart");
-      } else {
-        alert("حدث خطأ أثناء معالجة الطلب.");
-      }
+      // add the modal to doc
+      $("body").append(modalContent);
+      // open it -->open the modal
+      $("#myModal").css("display", "flex");
+      $("body").css("overflow", "hidden");
+      // close it -->close the modal
+      $(".close").click(function () {
+        $("#myModal").css("display", "none");
+        $("body").css("overflow", "auto");
+        setTimeout(() => {
+          window.location.href = "./Home.html";
+        }, 1000);
+      });
+      // delete cart from local storge
+      localStorage.removeItem("cart");
     } else {
-      alert("فشل التحقق من Captcha");
+      alert("حدث خطأ أثناء معالجة الطلب.");
     }
-  } catch (error) {
-    console.error(error);
-    alert("حدث خطأ أثناء التحقق من Captcha");
+  } else {
+    alert("فشل التحقق من Captcha");
   }
 };
 
 // verifyCaptcha
-function executeRecaptcha() {
-  return new Promise((resolve, reject) => {
-    grecaptcha.enterprise.ready(() => {
-      grecaptcha.enterprise
-        .execute("6Lc3_tYpAAAAADtS2ENqwQbfwBqPLsdI-xe6x42y", {
-          action: "login",
-        })
-        .then((token) => {
-          resolve(token);
-        });
-    });
-  });
+let captcha = "";
+function generateCaptcha() {
+  var chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var captchaLength = 6;
+  for (var i = 0; i < captchaLength; i++) {
+    var index = Math.floor(Math.random() * chars.length);
+    captcha += chars[index];
+  }
+  return captcha;
 }
+
+window.onload = function () {
+  refreshCaptcha();
+};
+
+function refreshCaptcha() {
+  var captcha = generateCaptcha();
+  cap.innerText = captcha;
+}
+
+// captcha validation
+const executeRecaptcha = () => {
+  if (captchaField.value === captcha) return true;
+  else return false;
+};
